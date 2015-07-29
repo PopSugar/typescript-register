@@ -66,7 +66,7 @@ var defaultCompilerOptions: typescript.CompilerOptions = {
  * Returns path to cache for source directory.
  * @param  {string} directory Directory with source code
  * @return {string}           Path with all special characters replaced with _ and
- *                            prepended path to temporary directory 
+ *                            prepended path to temporary directory
  */
 function getCachePath(directory: string): string {
     var sanitizeOptions = {
@@ -137,14 +137,13 @@ function isModified(tsPath: string, jsPath: string): boolean {
  * @param {typescript.CompilerOptions} options  The Compiler Options
  */
 function compile(filename: string, options: typescript.CompilerOptions): void {
-    var host = typescript.createCompilerHost(options);
-    var program = typescript.createProgram([filename], options, host);
-    var checker = program.getTypeChecker(true);
-    var result = checker.emitFiles();
+    var program = typescript.createProgram([filename], options);
+    var emitResult = program.emit();
+
+    var allDiagnostics = typescript.getPreEmitDiagnostics(program).concat(emitResult.diagnostics);
+
     if (emitError()) {
-        checkErrors(program.getDiagnostics()
-            .concat(checker.getDiagnostics()
-            .concat(result.diagnostics)));
+        checkErrors(allDiagnostics);
     }
 }
 
