@@ -12,7 +12,8 @@
     "compile": "tsc index.ts test/spec.ts --module commonjs --noImplicitAny",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "test": "istanbul cover node_modules/mocha/bin/_mocha",
-    "typings": "tsd reinstall"
+    "typings": "tsd reinstall",
+    "postinstall": "npm run compile"
   },
   "repository": {
     "type": "git",

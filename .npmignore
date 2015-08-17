@@ -3,5 +3,4 @@ test
 typings
 .editorconfig
 .travis.yml
-index.ts
 tsd.json
