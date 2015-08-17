@@ -13,7 +13,7 @@
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "test": "istanbul cover node_modules/mocha/bin/_mocha",
     "typings": "tsd reinstall",
-    "postinstall": "npm run compile"
+    "postinstall": "tsc index.ts test/spec.ts --module commonjs --noImplicitAny || true"
   },
   "repository": {
     "type": "git",
